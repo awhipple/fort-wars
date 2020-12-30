@@ -23,7 +23,7 @@ export default class Game {
       this.avo.register(cir);
       
       this.avo.onUpdate(() => {
-          cir.pos = this.avo.mouse.pos;s
+          cir.pos = this.avo.mouse.pos;
           console.log(cir.pos);
       });
     });
