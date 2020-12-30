@@ -1,6 +1,8 @@
 import Avocado from "./libraries/avocado/engine/GameEngine.js";
-import Color from "./libraries/avocado/gfx/Color.js";
-import Circle from "./libraries/avocado/gfx/shapes/Circle.js";
+import AnimatedSprite from "./libraries/avocado/gfx/sprites/AnimatedSprite.js";
+import Animation from "./libraries/avocado/gfx/sprites/Animation.js";
+import KeyFrames from "./libraries/avocado/gfx/sprites/KeyFrames.js";
+import Sprite from "./libraries/avocado/gfx/sprites/Sprite.js";
 
 window.onload = function() {
   (new Game()).start();
@@ -18,16 +20,23 @@ export default class Game {
   }
 
   start() {
-    this.avo.load().then(() => {
-      
-      var color = Color.random();
 
-      var cir = new Circle({x: 500, y: 500}, 40, {color});
-      this.avo.register(cir);
+    this.avo.images.preload("F_01");
+    
+    this.avo.load().then(() => {
+
+      var img = this.avo.images.get("F_01");
+      img.cut(16, 17);
+
+      var anim = this.avo.register(new AnimatedSprite(new Animation(new KeyFrames([img[4], img[8]]))));
       
       this.avo.onUpdate(() => {
-          cir.pos = this.avo.mouse.pos;
       });
+
+      this.avo.draw((ctx) => {
+        anim.getFrame().draw(ctx, 150, 150, 50, 50);
+      });
+      
     });
   }
 
