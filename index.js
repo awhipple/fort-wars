@@ -1,4 +1,5 @@
-import Avocado from "./node_modules/avocado2d/engine/GameEngine.js"
+import Avocado from "./libraries/avocado/engine/GameEngine.js";
+import Circle from "./libraries/avocado/gfx/shapes/Circle.js";
 
 window.onload = function() {
   (new Game()).start();
@@ -7,9 +8,6 @@ window.onload = function() {
 export default class Game {
   constructor(options = {}) {
     this.avo = new Avocado({
-      width: 1000,
-      height: 1000,
-      bgColor: "#000",
       ...options
     });
 
@@ -21,12 +19,12 @@ export default class Game {
   start() {
     this.avo.load().then(() => {
       
-      // {Init Code}
+      var cir = new Circle({x: 500, y: 500}, 40, {color: "white"});
+      this.avo.register(cir);
       
       this.avo.onUpdate(() => {
-        
-        // {Loop Code}
-
+          cir.pos = this.avo.mouse.pos;s
+          console.log(cir.pos);
       });
     });
   }
