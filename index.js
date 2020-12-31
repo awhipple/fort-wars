@@ -21,11 +21,11 @@ export default class Game {
 
   start() {
 
-    this.avo.images.preload("F_01");
+    this.avo.images.preload("f01");
     
     this.avo.load().then(() => {
 
-      var img = this.avo.images.get("F_01");
+      var img = this.avo.images.get("f01");
       img.cut(16, 17);
 
       var anim = this.avo.register(new AnimatedSprite(new Animation(new KeyFrames([img[4], img[8]]))));
